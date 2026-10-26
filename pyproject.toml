@@ -31,3 +31,12 @@ Repository = "https://github.com/hussain-alsaibai/tiny-sandbox"
 
 [tool.setuptools.packages.find]
 include = ["tiny_sandbox*"]
+
+[tool.ruff]
+# Lint rules are declared explicitly so the CI result does not depend
+# on whichever ruff release pip happens to install that day.
+# A sandbox executes untrusted code by design, and catches broad exceptions on
+# purpose so that user code cannot kill the sandbox:
+#   S102  (exec) and BLE001 (blind except) are intentional here.
+lint.select = ["E", "F", "W", "I", "B"]
+lint.ignore = ["E501"]
