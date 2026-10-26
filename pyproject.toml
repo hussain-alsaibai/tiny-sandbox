@@ -1,6 +1,6 @@
 [build-system]
 requires = ["setuptools>=64"]
-build-backend = "setuptools.backends._legacy:_Backend"
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "tiny-sandbox"
@@ -29,8 +29,11 @@ dependencies = []
 Homepage = "https://github.com/hussain-alsaibai/tiny-sandbox"
 Repository = "https://github.com/hussain-alsaibai/tiny-sandbox"
 
-[tool.setuptools.packages.find]
-include = ["tiny_sandbox*"]
+[tool.setuptools]
+# tiny_sandbox is a single module, not a package. Without an explicit
+# py-modules list, setuptools discovers no package and the wheel ships
+# no importable module.
+py-modules = ["tiny_sandbox"]
 
 [tool.ruff]
 # Lint rules are declared explicitly so the CI result does not depend
